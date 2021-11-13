@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clon/home_page.dart';
+import 'package:instagram_clon/search_page.dart';
 
 import 'account_page.dart';
 import 'home_page.dart';
@@ -14,7 +15,7 @@ class _TabPageState extends State<TabPage> {
 
   List _pages = [
     Homepage(),
-    Text('page2'),
+    SearchPage(),
     AccountPage(),
   ];
 
