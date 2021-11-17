@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AccountPage extends StatefulWidget {
 
@@ -7,11 +9,27 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
       body: _buildBody(),
+    );
+  }
+
+  Widget _buildAppBar(){
+    return AppBar(
+      actions: <Widget>[
+        IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: (){
+              FirebaseAuth.instance.signOut();
+              _googleSignIn.signOut();
+            }
+        )
+      ],
     );
   }
 
@@ -84,15 +102,4 @@ class _AccountPageState extends State<AccountPage> {
       ),
     );
   }
-
-  Widget _buildAppBar(){
-    return AppBar(
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.exit_to_app),
-            onPressed: (){}
-          )
-        ],
-      );
-    }
 }

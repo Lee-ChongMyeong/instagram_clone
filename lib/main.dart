@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clon/login_page.dart';
 import 'package:instagram_clon/root_page.dart';
 
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.white,
         accentColor: Colors.black,
       ),
-      home: RootPage()
+      home: LoginPage()
     );
   }
 }

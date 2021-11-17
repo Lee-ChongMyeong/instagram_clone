@@ -21,7 +21,8 @@ class Homepage extends StatelessWidget {
           child: Center(
             child: Column(
               children: <Widget>[
-                Text('Instagram에 오신것을 환영합니다.',
+                Text(
+                  'Instagram에 오신것을 환영합니다.',
                   style: TextStyle(fontSize: 24.0),
                 ),
                 Padding(padding: EdgeInsets.all(8.0)),
