@@ -4,6 +4,10 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AccountPage extends StatefulWidget {
 
+  final FirebaseUser user;
+
+  AccountPage(this.user);
+
   @override
   _AccountPageState createState() => _AccountPageState();
 }
@@ -16,20 +20,6 @@ class _AccountPageState extends State<AccountPage> {
     return Scaffold(
       appBar: _buildAppBar(),
       body: _buildBody(),
-    );
-  }
-
-  Widget _buildAppBar(){
-    return AppBar(
-      actions: <Widget>[
-        IconButton(
-            icon: Icon(Icons.exit_to_app),
-            onPressed: (){
-              FirebaseAuth.instance.signOut();
-              _googleSignIn.signOut();
-            }
-        )
-      ],
     );
   }
 
@@ -48,7 +38,7 @@ class _AccountPageState extends State<AccountPage> {
                     width: 80.0,
                     height: 80.0,
                     child: CircleAvatar(
-                      backgroundImage: NetworkImage('https://cdn.pixabay.com/photo/2016/03/26/22/13/man-1281562_1280.jpg')
+                      backgroundImage: NetworkImage(widget.user.photoUrl)
                     )
                   ),
                   Container(
@@ -81,7 +71,7 @@ class _AccountPageState extends State<AccountPage> {
               Padding(
                 padding: EdgeInsets.all(8.0),
               ),
-              Text('이름',
+              Text(widget.user.displayName,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
               )
             ],
@@ -100,6 +90,25 @@ class _AccountPageState extends State<AccountPage> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildAppBar(){
+    return AppBar(
+      actions: <Widget>[
+        IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: (){
+              try{
+                FirebaseAuth.instance.signOut();
+                _googleSignIn.signOut();
+                print('success');
+              }catch(e){
+                print(e.toString());
+              }
+            },
+        )
+      ],
     );
   }
 }

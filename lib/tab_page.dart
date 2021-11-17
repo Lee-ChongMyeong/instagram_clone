@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clon/home_page.dart';
 import 'package:instagram_clon/search_page.dart';
+import 'package:instagram_clon/account_page.dart';
 
 import 'account_page.dart';
 import 'home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:instagram_clon/search_page.dart';
 
 class TabPage extends StatefulWidget {
 
@@ -20,11 +20,17 @@ class TabPage extends StatefulWidget {
 class _TabPageState extends State<TabPage> {
   int _selectedIndex = 0;
 
-  List _pages = [
-    Homepage(),
-    SearchPage(),
-    AccountPage(),
-  ];
+  List _pages;
+
+  @override
+  void initState(){ // build 하기전에 생성자 다음에 호출되는 부분
+    super.initState();
+    _pages = [
+      Homepage(widget.user),
+      SearchPage(),
+      AccountPage(widget.user),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
