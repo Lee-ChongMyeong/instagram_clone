@@ -113,7 +113,9 @@ class _AccountPageState extends State<AccountPage> {
   }
 
   Widget _buildAppBar(){
+
     return AppBar(
+      backgroundColor: Colors.white,
       actions: <Widget>[
         IconButton(
             icon: Icon(Icons.exit_to_app),

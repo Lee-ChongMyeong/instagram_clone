@@ -18,7 +18,9 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+      ),
       body: _buildBody(),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
