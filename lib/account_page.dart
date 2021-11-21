@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AccountPage extends StatefulWidget {
 
@@ -14,6 +15,21 @@ class AccountPage extends StatefulWidget {
 
 class _AccountPageState extends State<AccountPage> {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  int _postCount = 0;
+
+  @override
+  void initState() { // 초기화 되는 부분
+    super.initState();
+    Firestore.instance.collection('post').where('email', isEqualTo: widget.user.email) // 내가 올린 게시글만 가져온다.
+      .getDocuments()
+      .then((snapShot){
+        setState((){
+          _postCount = snapShot.documents.length;
+        });
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -76,15 +92,18 @@ class _AccountPageState extends State<AccountPage> {
               )
             ],
           ),
-          Text('0\n게시글',
+          Text(
+            '$_postCount\n게시글',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 18.0),
           ),
-          Text('0\n팔로워',
+          Text(
+            '0\n팔로워',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 18.0),
           ),
-          Text('0\n팔로잉',
+          Text(
+            '0\n팔로잉',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 18.0),
           ),
